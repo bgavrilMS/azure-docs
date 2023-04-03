@@ -26,8 +26,8 @@ With MSAL.NET 3.x, the recommended way to instantiate an application is by using
 
 Before initializing an application, you first need to register it so that your app can be integrated with the Microsoft identity platform. Refer to the [Quickstart: Register an application with the Microsoft identity platform](quickstart-register-app.md) for more information. After registration, you may need the following information (which can be found in the Azure portal):
 
-- **Application (client) ID** - This is a string representing a GUID.
-- **Directory (tenant) ID** - Provides identity and access management (IAM) capabilities to applications and resources used by your organization. It can specify if you're writing a line of business application solely for your organization (also named single-tenant application).
+- **Application (client) ID** - This is a string representing of a GUID.
+- **Directory (tenant) ID** - Identifies your organization. 
 - The identity provider URL (named the **instance**) and the sign-in audience for your application. These two parameters are collectively known as the authority.
 - **Client credentials** - which can take the form of an application secret (client secret string) or certificate (of type `X509Certificate2`) if it's a confidential client app.
 - For web apps, and sometimes for public client apps (in particular when your app needs to use a broker), you'll have also set the **Redirect URI** where the identity provider will contact back your application with the security tokens.
@@ -94,14 +94,6 @@ In the code snippets using application builders, many `.With` methods can be app
 ### Modifiers common to public and confidential client applications
 
 The modifiers you can set on a public client or confidential client application builder can be found in the `AbstractApplicationBuilder<T>` class. The different methods can be found in the [Azure SDK for .NET documentation](/dotnet/api/microsoft.identity.client.abstractapplicationbuilder-1).
-
-### Modifiers specific to Xamarin.iOS applications
-
-The modifiers you can set on a public client application builder on Xamarin.iOS are:
-
-|Modifier | Description|
-|--------- | --------- |
-|`.WithIosKeychainSecurityGroup()` | **Xamarin.iOS only**: Sets the iOS key chain security group (for the cache persistence).|
 
 ### Modifiers specific to confidential client applications
 

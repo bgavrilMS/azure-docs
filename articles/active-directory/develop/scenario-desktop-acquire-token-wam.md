@@ -26,8 +26,7 @@ Using an authentication broker such as WAM has numerous benefits:
 - Enhanced security. See [Token protection](/azure/active-directory/conditional-access/concept-token-protection).
 - Support for Windows Hello, conditional access, and FIDO keys.
 - Integration with the Windows **Email & accounts** view.
-- Fast single sign-on.
-- Ability to sign in silently with the current Windows account.
+- Improved single sign on (SSO) using Primary Refresh Tokens (PRT)
 - Bug fixes and enhancements shipped with Windows.
 
 ## WAM limitations
@@ -94,6 +93,13 @@ ms-appx-web://microsoft.aad.brokerplugin/{client_id}
 ### Token cache persistence
 
 It's important to persist the MSAL token cache because MSAL continues to store ID tokens and account metadata there. For more information, see [Token cache serialization in MSAL.NET](/azure/active-directory/develop/msal-net-token-cache-serialization?tabs=desktop).
+
+### PRT support 
+
+Primary refresh tokens (PRTs) are special refresh tokens issued to brokers, which are not made available to apps directly. With a PRT, the broker is able to silently login the Windows user into any application.
+PRTs are a replacement for Integrated Windows Authentication, which requires complex setup and is only available for Work and School accounts.
+
+To use the PRT with the Windows broker, call `AcquireTokenSilent(new[] { "User.Read" }, PublicClientApplication.OperatingSystemAccount)`.
 
 ### Account for silent login
 

@@ -164,6 +164,8 @@ This access token is a v1.0-formatted token for Microsoft Graph. This is because
 
 An error response is returned by the token endpoint when trying to acquire an access token for the downstream API, if the downstream API has a Conditional Access policy (such as [multifactor authentication](../authentication/concept-mfa-howitworks.md)) set on it. The middle-tier service should surface this error to the client application so that the client application can provide the user interaction to satisfy the Conditional Access policy.
 
+To surface the error, the middle-tier [should respond with](https://datatracker.ietf.org/doc/html/rfc6750#section-3.1) HTTP 401 Unauthorized alongside a WWW-Authenticate header with the error details, in particular the claims. The client must parse the header and must acquire a new token from the token issuer, by presenting the claims challenge if one exists. Clients should not try to access the middle-tier service with cached tokens.
+
 ```json
 {
     "error":"interaction_required",
